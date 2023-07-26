@@ -2,13 +2,31 @@ import cv2 as cv
 import numpy as np
 from arithmetics import add, sub, mult, div
 from logics import logical_and, logical_or, logical_xor
+from structure import resize
+import math
 
 # img_a = cv.imread('images/lena.pgm', -1)
 # img_b = cv.imread('images/Airplane.pgm', -1)
 
 #precisa do resize
 img_a = cv.imread('images/tricolor_cat.jpg')
+# img_b = cv.imread('images/lena_cor.jpg')
 img_b = cv.imread('images/orange_cat.jpg')
+
+#############################
+#     ajuste de tamanho     #
+#############################
+
+img_a, img_b = resize(img_a, img_b)
+
+print(img_a.shape, img_b.shape)
+
+cv.imshow("A", img_a)
+k = cv.waitKey(0)
+
+cv.imshow("B", img_b)
+k = cv.waitKey(0)
+
 
 #############################
 #   operações aritméticas   #
