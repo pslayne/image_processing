@@ -3,10 +3,7 @@ from math import floor, ceil, sin, cos
 import numpy as np
 
 def padding(img_a, img_b):
-    if img_a.shape == img_b.shape:
-        pass
-    else:
-        # shape[0] = x | shape[1] = y   
+    if img_a.shape != img_b.shape:
         x = img_a.shape[0] - img_b.shape[0] # x > 0 : a > b | x < 0 : a < b
         if x > 0:
             img_b = cv.copyMakeBorder(img_b, floor(x/2), ceil(x/2), 0, 0, cv.BORDER_CONSTANT)
@@ -37,7 +34,7 @@ def scale(img, rate, scale = 'up'):
     if scale == 'up':
         width = int(width * (rate / 100 + 1))
         height = int(height * (rate / 100 + 1))
-    else: # scale = down
+    else: # scale down
         width = int(width * (1 - rate / 100))
         height = int(height * (1 - rate / 100))
     
@@ -47,10 +44,10 @@ def scale(img, rate, scale = 'up'):
 def rotate(img, rate):
     # calcula o centro
     (h, w) = img.shape[:2]
-    (cX, cY) = (w // 2, h // 2)
+    (center_x, center_y) = (w // 2, h // 2)
 
     # gira a imagem em 'rate' graus
-    M = cv.getRotationMatrix2D((cX, cY), rate, 1.0)
+    M = cv.getRotationMatrix2D((center_x, center_y), rate, 1.0)
 
     img_rotate = cv.warpAffine(img, M, (w, h))
 
