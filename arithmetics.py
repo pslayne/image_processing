@@ -17,3 +17,11 @@ def mult(img_a, img_b):
 def div(img_a, img_b):
     img_div = cv.divide(img_a, img_b)
     return img_div
+
+
+def binary(i):
+  b = bin(i)[2:]
+  if len(b) < 8:
+    add = '0' * (8 - len(b))
+    return add + b
+  return b
